@@ -1,0 +1,158 @@
+using LibraryManagementSystem.API.Models;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace LibraryManagementSystem.API.Controllers
+{
+    [ApiController]
+    [Route("[controller]")] // Route will be /Loans
+    public class LoansController : ControllerBase
+    {
+        private static List<Loan> _loans = new List<Loan>();
+        private static int _nextId = 1;
+
+        /// <summary>
+        /// Retrieves a list of all loans.
+        /// GET /loans
+        /// </summary>
+        [HttpGet]
+        public ActionResult<IEnumerable<Loan>> GetLoans()
+        {
+            return Ok(_loans);
+        }
+
+        /// <summary>
+        /// Creates a new loan.
+        /// POST /loans
+        /// </summary>
+        [HttpPost]
+        public ActionResult<Loan> PostLoan([FromBody] Loan newLoan)
+        {
+            if (newLoan == null)
+            {
+                return BadRequest("Loan data is null.");
+            }
+            newLoan.Id = _nextId++;
+            newLoan.LoanDate = DateTime.UtcNow;
+            newLoan.IsReturned = false;
+            newLoan.ReturnDate = null; // Ensure it's null for new loans
+
+            _loans.Add(newLoan);
+            return CreatedAtAction(nameof(GetLoan), new { id = newLoan.Id }, newLoan);
+        }
+
+        /// <summary>
+        /// Handles the return of a book.
+        /// POST /returns
+        /// </summary>
+        [HttpPost("returns")] // Route will be /Loans/returns
+        public IActionResult PostReturn([FromBody] int loanId)
+        {
+            var loanToReturn = _loans.FirstOrDefault(l => l.Id == loanId && !l.IsReturned);
+            if (loanToReturn == null)
+            {
+                return NotFound("Active loan not found for the given ID.");
+            }
+
+            loanToReturn.ReturnDate = DateTime.UtcNow;
+            loanToReturn.IsReturned = true;
+            return NoContent(); // 204 No Content for successful return
+        }
+
+        /// <summary>
+        /// Retrieves a loan by its ID. (Added for completeness)
+        /// GET /loans/{id}
+        /// </summary>
+        [HttpGet("{id}")]
+        public ActionResult<Loan> GetLoan(int id)
+        {
+            var loan = _loans.FirstOrDefault(l => l.Id == id);
+            if (loan == null)
+            {
+                return NotFound();
+            }
+            return Ok(loan);
+        }
+    }
+}
+using LibraryManagementSystem.API.Models;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace LibraryManagementSystem.API.Controllers
+{
+    [ApiController]
+    [Route("[controller]")] // Route will be /Loans
+    public class LoansController : ControllerBase
+    {
+        private static List<Loan> _loans = new List<Loan>();
+        private static int _nextId = 1;
+
+        /// <summary>
+        /// Retrieves a list of all loans.
+        /// GET /loans
+        /// </summary>
+        [HttpGet]
+        public ActionResult<IEnumerable<Loan>> GetLoans()
+        {
+            return Ok(_loans);
+        }
+
+        /// <summary>
+        /// Creates a new loan.
+        /// POST /loans
+        /// </summary>
+        [HttpPost]
+        public ActionResult<Loan> PostLoan([FromBody] Loan newLoan)
+        {
+            if (newLoan == null)
+            {
+                return BadRequest("Loan data is null.");
+            }
+            newLoan.Id = _nextId++;
+            newLoan.LoanDate = DateTime.UtcNow;
+            newLoan.IsReturned = false;
+            newLoan.ReturnDate = null; // Ensure it's null for new loans
+
+            _loans.Add(newLoan);
+            return CreatedAtAction(nameof(GetLoan), new { id = newLoan.Id }, newLoan);
+        }
+
+        /// <summary>
+        /// Handles the return of a book.
+        /// POST /returns
+        /// </summary>
+        [HttpPost("returns")] // Route will be /Loans/returns
+        public IActionResult PostReturn([FromBody] int loanId)
+        {
+            var loanToReturn = _loans.FirstOrDefault(l => l.Id == loanId && !l.IsReturned);
+            if (loanToReturn == null)
+            {
+                return NotFound("Active loan not found for the given ID.");
+            }
+
+            loanToReturn.ReturnDate = DateTime.UtcNow;
+            loanToReturn.IsReturned = true;
+            return NoContent(); // 204 No Content for successful return
+        }
+
+        /// <summary>
+        /// Retrieves a loan by its ID. (Added for completeness)
+        /// GET /loans/{id}
+        /// </summary>
+        [HttpGet("{id}")]
+        public ActionResult<Loan> GetLoan(int id)
+        {
+            var loan = _loans.FirstOrDefault(l => l.Id == id);
+            if (loan == null)
+            {
+                return NotFound();
+            }
+            return Ok(loan);
+        }
+    }
+}

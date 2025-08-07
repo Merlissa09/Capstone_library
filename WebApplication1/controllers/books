@@ -1,0 +1,104 @@
+using LibraryManagementSystem.API.Models;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace LibraryManagementSystem.API.Controllers
+{
+    [ApiController]
+    [Route("[controller]")] // Route will be /Books
+    public class BooksController : ControllerBase
+    {
+        // Placeholder for in-memory data store
+        private static List<Book> _books = new List<Book>
+        {
+            new Book { Id = 1, Title = "The Hitchhiker's Guide to the Galaxy", Author = "Douglas Adams", ISBN = "978-0345391803", IsAvailable = true },
+            new Book { Id = 2, Title = "1984", Author = "George Orwell", ISBN = "978-0451524935", IsAvailable = true }
+        };
+        private static int _nextId = 3;
+
+        /// <summary>
+        /// Retrieves a list of all books.
+        /// GET /books
+        /// </summary>
+        [HttpGet]
+        public ActionResult<IEnumerable<Book>> GetBooks()
+        {
+            return Ok(_books);
+        }
+
+        /// <summary>
+        /// Retrieves a book by its ID.
+        /// GET /books/{id}
+        /// </summary>
+        [HttpGet("{id}")]
+        public ActionResult<Book> GetBook(int id)
+        {
+            var book = _books.FirstOrDefault(b => b.Id == id);
+            if (book == null)
+            {
+                return NotFound();
+            }
+            return Ok(book);
+        }
+
+        /// <summary>
+        /// Creates a new book.
+        /// POST /books
+        /// </summary>
+        [HttpPost]
+        public ActionResult<Book> PostBook([FromBody] Book newBook)
+        {
+            if (newBook == null)
+            {
+                return BadRequest("Book data is null.");
+            }
+            newBook.Id = _nextId++;
+            _books.Add(newBook);
+            return CreatedAtAction(nameof(GetBook), new { id = newBook.Id }, newBook);
+        }
+
+        /// <summary>
+        /// Updates an existing book.
+        /// PUT /books/{id}
+        /// </summary>
+        [HttpPut("{id}")]
+        public IActionResult PutBook(int id, [FromBody] Book updatedBook)
+        {
+            if (updatedBook == null || id != updatedBook.Id)
+            {
+                return BadRequest("Invalid book data or ID mismatch.");
+            }
+
+            var existingBook = _books.FirstOrDefault(b => b.Id == id);
+            if (existingBook == null)
+            {
+                return NotFound();
+            }
+
+            existingBook.Title = updatedBook.Title;
+            existingBook.Author = updatedBook.Author;
+            existingBook.ISBN = updatedBook.ISBN;
+            existingBook.IsAvailable = updatedBook.IsAvailable;
+
+            return NoContent(); // 204 No Content for successful update
+        }
+
+        /// <summary>
+        /// Deletes a book by its ID.
+        /// DELETE /books/{id}
+        /// </summary>
+        [HttpDelete("{id}")]
+        public IActionResult DeleteBook(int id)
+        {
+            var bookToRemove = _books.FirstOrDefault(b => b.Id == id);
+            if (bookToRemove == null)
+            {
+                return NotFound();
+            }
+
+            _books.Remove(bookToRemove);
+            return NoContent(); // 204 No Content for successful deletion
+        }
+    }
+}
