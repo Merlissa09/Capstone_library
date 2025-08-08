@@ -1,4 +1,4 @@
-namespace LibraryManagementSystem.API.Models
+namespace capstone_library.Models
 {
     public class User
     {

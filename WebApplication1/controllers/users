@@ -1,12 +1,12 @@
-using LibraryManagementSystem.API.Models;
+using capstone_library.Models; // Added this using directive
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace LibraryManagementSystem.API.Controllers
+namespace capstone_library.Controllers
 {
     [ApiController]
-    [Route("[controller]")] // Route will be /Users
+    [Route("[controller]")] // This will route requests to /users
     public class UsersController : ControllerBase
     {
         private static List<User> _users = new List<User>
@@ -44,7 +44,7 @@ namespace LibraryManagementSystem.API.Controllers
 
         /// <summary>
         /// Retrieves a user by their ID.
-        /// GET /users/{id} (Added for completeness, though not explicitly requested)
+        /// GET /users/{id}
         /// </summary>
         [HttpGet("{id}")]
         public ActionResult<User> GetUser(int id)

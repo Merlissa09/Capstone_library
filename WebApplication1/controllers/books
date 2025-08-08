@@ -1,12 +1,12 @@
-using LibraryManagementSystem.API.Models;
+using capstone_library.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace LibraryManagementSystem.API.Controllers
+namespace capstone_library.Controllers
 {
     [ApiController]
-    [Route("[controller]")] // Route will be /Books
+    [Route("[controller]")]
     public class BooksController : ControllerBase
     {
         // Placeholder for in-memory data store
@@ -81,7 +81,7 @@ namespace LibraryManagementSystem.API.Controllers
             existingBook.ISBN = updatedBook.ISBN;
             existingBook.IsAvailable = updatedBook.IsAvailable;
 
-            return NoContent(); // 204 No Content for successful update
+            return NoContent();
         }
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace LibraryManagementSystem.API.Controllers
             }
 
             _books.Remove(bookToRemove);
-            return NoContent(); // 204 No Content for successful deletion
+            return NoContent();
         }
     }
 }

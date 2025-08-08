@@ -1,0 +1,28 @@
+using capstone_library.Models; // Added this using directive
+using Microsoft.AspNetCore.Mvc;
+
+namespace capstone_library.Controllers
+{
+    [ApiController]
+    [Route("[controller]")] // This will route requests to /returns
+    public class ReturnsController : ControllerBase
+    {
+        /// <summary>
+        /// Handles the return of a book.
+        /// POST /returns
+        /// </summary>
+        [HttpPost]
+        public IActionResult PostReturn([FromBody] ReturnRequest returnRequest)
+        {
+            // Placeholder logic to process a return
+            if (returnRequest == null)
+            {
+                return BadRequest("Return data is null.");
+            }
+
+            // In a real application, you would update the loan status, book availability, etc.
+            // For now, this simply returns a success message.
+            return Ok($"Book with ID {returnRequest.BookId} returned successfully by user with ID {returnRequest.UserId}.");
+        }
+    }
+}

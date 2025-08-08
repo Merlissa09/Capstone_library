@@ -1,6 +1,6 @@
 using System;
 
-namespace LibraryManagementSystem.API.Models
+namespace capstone_library.Models
 {
     public class Loan
     {

@@ -1,5 +1,5 @@
 //Models/Book.cs
-namespace LibraryManagementSystem.API.Models
+namespace capstone_library.Models
 {
     public class Book
     {
