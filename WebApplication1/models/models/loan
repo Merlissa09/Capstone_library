@@ -1,6 +1,7 @@
+// Loan.cs
 using System;
 
-namespace capstone_library.Models
+namespace capstone_library.Models // <-- Corrected namespace
 {
     public class Loan
     {
@@ -8,7 +9,18 @@ namespace capstone_library.Models
         public int BookId { get; set; }
         public int UserId { get; set; }
         public DateTime LoanDate { get; set; }
-        public DateTime? ReturnDate { get; set; } // Nullable for active loans
+        public DateTime? ReturnDate { get; set; }
         public bool IsReturned { get; set; } = false;
+    }
+}
+
+
+// ILoanable.cs
+namespace capstone_library.Models // <-- Corrected namespace
+{
+    public interface ILoanable
+    {
+        void Loan();
+        bool IsAvailable { get; set; }
     }
 }

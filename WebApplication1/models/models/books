@@ -1,12 +1,33 @@
-//Models/Book.cs
+using System;
+
 namespace capstone_library.Models
 {
-    public class Book
+    public class Book : LibraryItem, ILoanable
     {
-        public int Id { get; set; }
-        public string? Title { get; set; }
-        public string? Author { get; set; }
-        public string? ISBN { get; set; }
-        public bool IsAvailable { get; set; } = true;
+        public string Author { get; set; }
+        public string ISBN { get; set; }
+        public int LoanDurationInDays { get; set; }
+
+        // The constructor now calls the base class constructor
+        public Book(int id, string title, string author, string isbn) : base(title)
+        {
+            Id = id;
+            Author = author;
+            ISBN = isbn;
+            LoanDurationInDays = 14;
+        }
+
+        public void Loan()
+        {
+            if (IsAvailable)
+            {
+                IsAvailable = false;
+                Console.WriteLine($"Book '{Title}' has been loaned out.");
+            }
+            else
+            {
+                Console.WriteLine($"Book '{Title}' is already on loan.");
+            }
+        }
     }
 }
