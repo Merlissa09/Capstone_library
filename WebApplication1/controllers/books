@@ -1,3 +1,4 @@
+// BooksController.cs - Demonstrates Polymorphism and API Endpoints
 using capstone_library.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -9,43 +10,34 @@ namespace capstone_library.Controllers
     [Route("[controller]")]
     public class BooksController : ControllerBase
     {
-        // Placeholder for in-memory data store
-        private static List<Book> _books = new List<Book>
+        // Data store uses the base class to hold any type of LibraryItem, demonstrating polymorphism.
+        private static List<LibraryItem> _libraryItems = new List<LibraryItem>
         {
-            new Book { Id = 1, Title = "The Hitchhiker's Guide to the Galaxy", Author = "Douglas Adams", ISBN = "978-0345391803", IsAvailable = true },
-            new Book { Id = 2, Title = "1984", Author = "George Orwell", ISBN = "978-0451524935", IsAvailable = true }
+            new Book(1, "The Hitchhiker's Guide to the Galaxy", "Douglas Adams", "978-0345391803"),
+            new Book(2, "1984", "George Orwell", "978-0451524935")
         };
         private static int _nextId = 3;
 
-        /// <summary>
-        /// Retrieves a list of all books.
-        /// GET /books
-        /// </summary>
+        // GET /books
         [HttpGet]
-        public ActionResult<IEnumerable<Book>> GetBooks()
+        public ActionResult<IEnumerable<LibraryItem>> GetBooks()
         {
-            return Ok(_books);
+            return Ok(_libraryItems);
         }
 
-        /// <summary>
-        /// Retrieves a book by its ID.
-        /// GET /books/{id}
-        /// </summary>
+        // GET /books/{id}
         [HttpGet("{id}")]
-        public ActionResult<Book> GetBook(int id)
+        public ActionResult<LibraryItem> GetBook(int id)
         {
-            var book = _books.FirstOrDefault(b => b.Id == id);
-            if (book == null)
+            var item = _libraryItems.FirstOrDefault(b => b.Id == id);
+            if (item == null)
             {
                 return NotFound();
             }
-            return Ok(book);
+            return Ok(item);
         }
 
-        /// <summary>
-        /// Creates a new book.
-        /// POST /books
-        /// </summary>
+        // POST /books
         [HttpPost]
         public ActionResult<Book> PostBook([FromBody] Book newBook)
         {
@@ -54,14 +46,11 @@ namespace capstone_library.Controllers
                 return BadRequest("Book data is null.");
             }
             newBook.Id = _nextId++;
-            _books.Add(newBook);
+            _libraryItems.Add(newBook);
             return CreatedAtAction(nameof(GetBook), new { id = newBook.Id }, newBook);
         }
 
-        /// <summary>
-        /// Updates an existing book.
-        /// PUT /books/{id}
-        /// </summary>
+        // PUT /books/{id}
         [HttpPut("{id}")]
         public IActionResult PutBook(int id, [FromBody] Book updatedBook)
         {
@@ -70,8 +59,9 @@ namespace capstone_library.Controllers
                 return BadRequest("Invalid book data or ID mismatch.");
             }
 
-            var existingBook = _books.FirstOrDefault(b => b.Id == id);
-            if (existingBook == null)
+            var existingItem = _libraryItems.FirstOrDefault(b => b.Id == id);
+            // Check if the item exists and is a Book to perform the update
+            if (existingItem == null || !(existingItem is Book existingBook))
             {
                 return NotFound();
             }
@@ -84,21 +74,36 @@ namespace capstone_library.Controllers
             return NoContent();
         }
 
-        /// <summary>
-        /// Deletes a book by its ID.
-        /// DELETE /books/{id}
-        /// </summary>
+        // DELETE /books/{id}
         [HttpDelete("{id}")]
         public IActionResult DeleteBook(int id)
         {
-            var bookToRemove = _books.FirstOrDefault(b => b.Id == id);
-            if (bookToRemove == null)
+            var itemToRemove = _libraryItems.FirstOrDefault(b => b.Id == id);
+            if (itemToRemove == null)
             {
                 return NotFound();
             }
-
-            _books.Remove(bookToRemove);
+            _libraryItems.Remove(itemToRemove);
             return NoContent();
+        }
+
+        // POST /books/{id}/loan - This uses the abstraction from the ILoanable interface
+        [HttpPost("{id}/loan")]
+        public IActionResult LoanItem(int id)
+        {
+            var item = _libraryItems.FirstOrDefault(i => i.Id == id);
+            if (item == null)
+            {
+                return NotFound("Item not found.");
+            }
+
+            // Demonstrates Polymorphism: Can treat any LibraryItem as an ILoanable
+            if (item is ILoanable loanableItem)
+            {
+                loanableItem.Loan();
+                return Ok($"Item '{item.Title}' has been loaned.");
+            }
+            return BadRequest("This item cannot be loaned.");
         }
     }
 }

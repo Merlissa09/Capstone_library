@@ -1,20 +1,24 @@
+// LibraryItem.cs - This is our abstract base class (Abstraction & Inheritance)
 using System;
 
 namespace capstone_library.Models
 {
+    // The abstract class ensures all derived classes have an Id, Title, and IsAvailable property.
     public abstract class LibraryItem
     {
+        // Encapsulation: Private fields with public accessors
         private int _id;
         private string _title;
         private bool _isAvailable;
 
-        // Constructor to initialize the non-nullable fields
-        public LibraryItem(string title)
+        // Constructor to ensure non-nullable fields are initialized
+        protected LibraryItem(string title)
         {
             _title = title;
-            _isAvailable = true; // Initialize to a default value
+            _isAvailable = true;
         }
 
+        // Public getters and setters for controlled access
         public int Id
         {
             get => _id;
@@ -33,9 +37,7 @@ namespace capstone_library.Models
             set => _isAvailable = value;
         }
 
-        public void DisplayStatus()
-        {
-            Console.WriteLine($"Item ID: {Id}, Title: {Title}, Available: {IsAvailable}");
-        }
+        // Abstract method to be implemented by derived classes
+        public abstract void DisplayStatus();
     }
 }

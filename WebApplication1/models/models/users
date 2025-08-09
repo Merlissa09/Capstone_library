@@ -1,5 +1,5 @@
-// User.cs
-namespace capstone_library.Models // <-- Corrected namespace
+// User.cs - Simple class demonstrating Encapsulation
+namespace capstone_library.Models
 {
     public class User
     {

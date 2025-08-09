@@ -1,3 +1,4 @@
+// LoansController.cs
 using capstone_library.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -10,39 +11,17 @@ namespace capstone_library.Controllers
     [Route("[controller]")]
     public class LoansController : ControllerBase
     {
-        // In-memory data stores (placeholders)
         private static List<Loan> _loans = new List<Loan>();
         private static int _nextId = 1;
 
-        /// <summary>
-        /// Retrieves a list of all loans.
-        /// GET /loans
-        /// </summary>
+        // GET /loans
         [HttpGet]
         public ActionResult<IEnumerable<Loan>> GetLoans()
         {
             return Ok(_loans);
         }
 
-        /// <summary>
-        /// Retrieves a loan by its ID.
-        /// GET /loans/{id}
-        /// </summary>
-        [HttpGet("{id}")]
-        public ActionResult<Loan> GetLoan(int id)
-        {
-            var loan = _loans.FirstOrDefault(l => l.Id == id);
-            if (loan == null)
-            {
-                return NotFound();
-            }
-            return Ok(loan);
-        }
-
-        /// <summary>
-        /// Creates a new loan.
-        /// POST /loans
-        /// </summary>
+        // POST /loans
         [HttpPost]
         public ActionResult<Loan> PostLoan([FromBody] Loan newLoan)
         {
@@ -52,10 +31,20 @@ namespace capstone_library.Controllers
             }
             newLoan.Id = _nextId++;
             newLoan.LoanDate = DateTime.UtcNow;
-            newLoan.IsReturned = false;
-            newLoan.ReturnDate = null;
             _loans.Add(newLoan);
             return CreatedAtAction(nameof(GetLoan), new { id = newLoan.Id }, newLoan);
+        }
+
+        // GET /loans/{id}
+        [HttpGet("{id}")]
+        public ActionResult<Loan> GetLoan(int id)
+        {
+            var loan = _loans.FirstOrDefault(l => l.Id == id);
+            if (loan == null)
+            {
+                return NotFound();
+            }
+            return Ok(loan);
         }
     }
 }
