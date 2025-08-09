@@ -1,7 +1,7 @@
 // Book.cs - This class inherits from LibraryItem (Inheritance) and implements ILoanable (Abstraction)
 using System;
 
-namespace capstone_library.Models
+namespace WebApplication1.Models
 {
     // The Book class is a derived class that inherits from the abstract LibraryItem base class.
     public class Book : LibraryItem, ILoanable

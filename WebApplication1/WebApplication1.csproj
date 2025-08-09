@@ -7,9 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.7" />
-    <PackageReference Include="MSTest.TestFramework" Version="3.10.1" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.3" />
+    <!-- Essential package references for a Web API -->
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.0-preview.6.24328.7" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
+
+  <!-- IMPORTANT: The MSTest package should only be in your test project, not here.
+  <ItemGroup>
+    <PackageReference Include="MSTest.TestFramework" Version="3.10.1" />
+  </ItemGroup>
+  -->
 
 </Project>

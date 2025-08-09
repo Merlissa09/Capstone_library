@@ -1,7 +1,7 @@
 // LibraryItem.cs - This is our abstract base class (Abstraction & Inheritance)
 using System;
 
-namespace capstone_library.Models
+namespace WebApplication1.Models
 {
     // The abstract class ensures all derived classes have an Id, Title, and IsAvailable property.
     public abstract class LibraryItem

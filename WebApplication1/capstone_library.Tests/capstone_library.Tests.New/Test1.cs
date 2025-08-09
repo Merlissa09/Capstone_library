@@ -1,4 +1,4 @@
-﻿namespace capstone_library.Tests;
+﻿namespace capstone_library.Tests.New;
 
 [TestClass]
 public sealed class Test1

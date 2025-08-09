@@ -1,11 +1,11 @@
 // ReturnsController.cs
-using capstone_library.Models;
+using WebApplication1.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace capstone_library.Controllers
+namespace WebApplication1.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -24,7 +24,7 @@ namespace capstone_library.Controllers
     }
 }
 // ReturnRequest.cs (This should be placed in your Models folder)
-namespace capstone_library.Models
+namespace WebApplication1.Models
 {
     public class ReturnRequest
     {

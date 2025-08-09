@@ -1,5 +1,5 @@
 // User.cs - Simple class demonstrating Encapsulation
-namespace capstone_library.Models
+namespace WebApplication1.Models
 {
     public class User
     {

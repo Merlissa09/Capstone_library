@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{75493378-CC27-4751-9881-9EAE06D09B6A}"
+
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApplication1", "WebApplication1", "{CAA89F83-C6F7-8CD6-55EA-6F750AA7E00E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "capstone_library.Tests", "capstone_library.Tests", "{93B1EE77-4E3B-C2F2-8F8F-A13DF91EC53A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "capstone_library.Tests.New", "WebApplication1\capstone_library.Tests\capstone_library.Tests.New\capstone_library.Tests.New.csproj", "{D83FD8D9-5CC0-44B8-ADA5-8BFE9EAF2070}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,8 +33,24 @@ Global
 		{75493378-CC27-4751-9881-9EAE06D09B6A}.Release|x64.Build.0 = Release|Any CPU
 		{75493378-CC27-4751-9881-9EAE06D09B6A}.Release|x86.ActiveCfg = Release|Any CPU
 		{75493378-CC27-4751-9881-9EAE06D09B6A}.Release|x86.Build.0 = Release|Any CPU
+		{D83FD8D9-5CC0-44B8-ADA5-8BFE9EAF2070}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D83FD8D9-5CC0-44B8-ADA5-8BFE9EAF2070}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D83FD8D9-5CC0-44B8-ADA5-8BFE9EAF2070}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D83FD8D9-5CC0-44B8-ADA5-8BFE9EAF2070}.Debug|x64.Build.0 = Debug|Any CPU
+		{D83FD8D9-5CC0-44B8-ADA5-8BFE9EAF2070}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D83FD8D9-5CC0-44B8-ADA5-8BFE9EAF2070}.Debug|x86.Build.0 = Debug|Any CPU
+		{D83FD8D9-5CC0-44B8-ADA5-8BFE9EAF2070}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D83FD8D9-5CC0-44B8-ADA5-8BFE9EAF2070}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D83FD8D9-5CC0-44B8-ADA5-8BFE9EAF2070}.Release|x64.ActiveCfg = Release|Any CPU
+		{D83FD8D9-5CC0-44B8-ADA5-8BFE9EAF2070}.Release|x64.Build.0 = Release|Any CPU
+		{D83FD8D9-5CC0-44B8-ADA5-8BFE9EAF2070}.Release|x86.ActiveCfg = Release|Any CPU
+		{D83FD8D9-5CC0-44B8-ADA5-8BFE9EAF2070}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{93B1EE77-4E3B-C2F2-8F8F-A13DF91EC53A} = {CAA89F83-C6F7-8CD6-55EA-6F750AA7E00E}
+		{D83FD8D9-5CC0-44B8-ADA5-8BFE9EAF2070} = {93B1EE77-4E3B-C2F2-8F8F-A13DF91EC53A}
 	EndGlobalSection
 EndGlobal

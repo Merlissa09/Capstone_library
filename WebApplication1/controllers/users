@@ -1,9 +1,9 @@
-using capstone_library.Models; // Added this using directive
+using WebApplication1.Models; // Added this using directive
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace capstone_library.Controllers
+namespace WebApplication1.Controllers
 {
     [ApiController]
     [Route("[controller]")] // This will route requests to /users

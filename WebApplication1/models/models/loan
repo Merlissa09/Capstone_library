@@ -1,7 +1,7 @@
 // Loan.cs
 using System;
 
-namespace capstone_library.Models
+namespace WebApplication1.Models
 {
     public class Loan
     {
@@ -16,7 +16,7 @@ namespace capstone_library.Models
 
 
 // ILoanable.cs - Interface for Abstraction
-namespace capstone_library.Models
+namespace WebApplication1.Models
 {
     // This interface defines a contract that any class can implement to be "loanable."
     public interface ILoanable
