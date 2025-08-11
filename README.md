@@ -12,11 +12,11 @@ Set Startup Project: Right-click the capstone_library.WebAPI project in Solution
 Execute: Run the project by pressing the F5 key. The application will launch and open a web browser with the API's Swagger documentation.
 
 How to Run Tests
-Open Test Explorer: Navigate to Test > Test Explorer in the Visual Studio menu.
+Tests are currently non functioning
 
 Build Solution: Ensure all project code is compiled by selecting Build > Build Solution or using the Ctrl + Shift + B keyboard shortcut.
 
-Run Tests: In the Test Explorer window, click the Run All button to execute all unit tests. Test results will be displayed in the same window.
+Run Tests: Tests are currently nonfunctioning 
 
 Example Usage
 The following examples demonstrate how to interact with the API endpoints using curl commands. Replace [PORT] with the port number assigned to your local instance.
